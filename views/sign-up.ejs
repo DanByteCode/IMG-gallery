@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sign up</title>
+  <link rel="shortcut icon" href="/icons/photos.svg" type="image/x-icon">
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+
+<body>
+  <header class="header-bar">
+    <a href="/">
+      <h1>IMG.allery</h1>
+    </a>
+  </header>
+  <form class="single-form" method="POST">
+    <h2>Sign Up</h2>
+    <label for="nickname">Nickname</label>
+    <input name="nickname" placeholder="Public name..." type="text" minlength="4"  maxlength="24" required autofocus />
+    <label for="username">User</label>
+    <input name="username" placeholder="Login user..." type="text" minlength="4" maxlength="24" required />
+    <label for="password">Password</label>
+    <input name="password" type="password" placeholder="******" minlength="4" required />
+    <button>Sign Up</button>
+  </form>
+  <% if (message) { %>
+    <span>
+      <%= message %>
+    </span>
+    <% } %>
+      <span>
+        You have a count?
+        <a href="/login">
+          <span>Login</span>
+        </a>
+      </span>
+</body>
+
+</html>

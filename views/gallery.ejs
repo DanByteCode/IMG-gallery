@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Private Galley</title>
+  <link rel="shortcut icon" href="/icons/photos.svg" type="image/x-icon">
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+  <% if (user) {%>
+    <header class="header-bar">
+      <a href="/">
+        <h1>IMG.allery</h1>
+      </a>
+      <div class="navigation">
+        <nav class="selector">
+          <ul>
+            <li><a href="/">Public</a></li>
+            <li><a href="/gallery"><b>Private</b></a></li>
+          </ul>
+        </nav>
+        <details>
+          <summary>
+            <img src="/icons/acount.svg" class="icon" width="20">
+            <%= user.name %>
+          </summary>
+          <ul class="menu">
+            <li><a href="/log-out">Log-out</a></li>
+          </ul>
+        </details>
+      </div>
+    </header>
+    <% } else { %>
+      <header class="header-bar">
+        <a href="/">
+          <h1>Gallery</h1>
+        </a>
+        <nav>
+          <ul>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/sign-up">Sign-in</a></li>
+          </ul>
+        </nav>
+      </header>
+      <% } %>
+        <div class="top">
+          <h2>Your Collections</h2>
+          <% if (user) {%>
+            <a href="/collection/new" class="tag">
+              <img src="/icons/add.svg" class="icon" width="24"> New Collection
+            </a>
+            <% } %>
+        </div>
+        <main class="board card-container">
+          <% list.map((i)=>{ %>
+            <article class="collection-card">
+              <% if(i.permissions) { %>
+                <a class="options-icon" href="/collection/<%= i.id %>/edit">
+                  <img src="/icons/settings.svg" title="Settings" />
+                </a>
+                <% } %>
+              <a href="collection/<%= i.id%>" class="link-card">
+                <img src="<%= i.urlPrev %>" class="preview-img" width="200" height="200" />
+                <div class="collection-info">
+                  <h3>
+                    <%= i.name %>
+                  </h3>
+                  <p>
+                    <%= i.description %>
+                  </p>
+                  <span class="visibility-icon">
+                    <% if(i.publish) { %>
+                      <img class="icon" width="20" src="/icons/public.svg" title="Public" />
+                      <% } else { %>
+                        <img class="icon" width="20" src="/icons/lock.svg" title="Private" />
+                        <% } %>
+                  </span>
+                  <span class="img-count"><img class="icon" src="/icons/photos.svg">
+                    <%= i.images.length %>
+                  </span>
+                </div>
+              </a>
+            </article>
+            <% }) %>
+        </main>
+</body>
+
+</html>

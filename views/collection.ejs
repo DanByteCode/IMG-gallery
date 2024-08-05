@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Collection: <%= collection.name %></title>
+  <link rel="shortcut icon" href="/icons/photos.svg" type="image/x-icon">
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+
+<body>
+
+  <% if (user) {%>
+    <header class="header-bar">
+      <a href="/">
+        <h1>IMG.allery</h1>
+      </a>
+      <div class="navigation">
+        <nav class="selector">
+          <ul>
+            <li><a href="/">Public</a></li>
+            <li><a href="/gallery">Private</a></li>
+          </ul>
+        </nav>
+        <details>
+          <summary>
+            <img src="/icons/acount.svg" class="icon" width="20">
+            <%= user.name %>
+          </summary>
+          <ul class="menu">
+            <li><a href="/log-out">Log-out</a></li>
+          </ul>
+        </details>
+      </div>
+    </header>
+    <% } else { %>
+      <header class="header-bar">
+        <a href="/">
+          <h1>IMG.allery</h1>
+        </a>
+        <nav>
+          <ul>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/sign-up">Sign-in</a></li>
+          </ul>
+        </nav>
+      </header>
+      <% } %>
+        <main class="container">
+          <div class="details box">
+            <div>
+              <h2>
+                <%= collection.name %>
+              </h2>
+              <% if (permissions) {%>
+                <p class="visibility-text">
+                  <% if(collection.publish) { %>
+                    <img class="icon" width="20" src="/icons/public.svg" title="Public" /> Public
+                    <% } else { %>
+                      <img class="icon" width="20" src="/icons/lock.svg" title="Private" /> Private
+                      <% } %>
+                </p>
+                <% } %>
+              <p class="author">
+                <img src="/icons/user.svg" class="icon" width="20">
+                <%= collection.user.name %>
+              </p>
+              <p class="information">
+                <img src="/icons/photos.svg" class="icon" width="20">
+                <%= collection.images.length %> images
+              </p>
+              <p class="description"><%= collection.description %>
+              </p>
+            </div>
+            <% if (permissions) {%>
+              <a class="add-btn" href="/collection/<%= collection.id %>/add" class="tag">
+                <img class="icon" src="/icons/add.svg" width="18"> Add Image
+              </a>
+              <a class="options-icon" href="/collection/<%= collection.id %>/edit"><img class="icon"
+                  src="/icons/settings.svg" title="Options" /></a>
+              <% } %>
+          </div>
+          <div class="galery">
+            <% images?.forEach((im)=>{ %>
+              <article>
+                <a href="/image/<%= im.id %>">
+                  <img class="preview-img" src="<%= im.preview %>" alt="<%= im.name %>">
+                </a>
+                <h3>
+                  <%= im.name %>
+                </h3>
+                <span class="img-info">
+                  <%= im.width %> <span>&#215;</span>
+                    <%= im.height %>
+                </span>
+                <span class="footer-text">
+                 <small><%= im.date %></small>
+                </span>
+                <% if (permissions) {%>
+                  <div> <a class="options-icon" href="/image/<%= im.id %>/edit"><img class="icon"
+                        src="/icons/settings.svg" title="Edit image name" /></a></div>
+                  <% } %>
+              </article>
+              <% }) %>
+          </div>
+        </main>
+</body>
+
+</html>

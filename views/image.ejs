@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Image: <%= image.name %></title>
+  <link rel="shortcut icon" href="/icons/photos.svg" type="image/x-icon">
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+
+<body>
+  <% if (user) {%>
+    <header class="header-bar">
+      <a href="/">
+        <h1>IMG.allery</h1>
+      </a>
+      <div class="navigation">
+        <nav class="selector">
+          <ul>
+            <li><a href="/">Public</a></li>
+            <li><a href="/gallery">Private</a></li>
+          </ul>
+        </nav>
+        <details>
+          <summary>
+            <img src="/icons/acount.svg" class="icon" width="20">
+            <%= user.name %>
+          </summary>
+          <ul class="menu">
+            <li><a href="/log-out">Log-out</a></li>
+          </ul>
+        </details>
+      </div>
+    </header>
+    <% } else { %>
+      <header class="header-bar">
+        <a href="/">
+          <h1>IMG.allery</h1>
+        </a>
+        <nav>
+          <ul>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/sign-up">Sign-in</a></li>
+          </ul>
+        </nav>
+      </header>
+      <% } %>
+        <main class="container">
+          <div class="details box">
+            <h1>
+              <%= image.name %>
+            </h1>
+            <p>
+              <img class="icon" src="/icons/photos.svg" >
+              <%= image.info.collectionName %>
+            </p>
+            <p class="information">
+              Size: 
+              <span class="img-info">
+                <%= image.width %> <span>&#215;</span>
+                <%= image.height %>
+              </span>
+            </p>
+          <span class="information footer-text">
+            <%= image.date %>
+          </span>
+          <% if (permissions) {%>
+            <a class="options-icon" href="/image/<%= image.id %>/edit"><img class="icon"
+              src="/icons/settings.svg" title="Options" /></a>
+          <% } %>
+          </div>
+          <article>
+              <img src="<%= image.source %>" alt="<%= image.name %>">
+          </article>
+        </main>
+</body>
+
+</html>

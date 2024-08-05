@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Add Image</title>
+    <link rel="shortcut icon" href="/icons/photos.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/style.css">
+  </head>
+
+<% if (user) {%>
+  <header class="header-bar">
+    <a href="/">
+      <h1>IMG.allery</h1>
+    </a>
+    <div class="navigation">
+      <nav class="selector">
+        <ul>
+          <li><a href="/">Public</a></li>
+          <li><a href="/gallery">Private</a></li>
+        </ul>
+      </nav>
+      <details>
+        <summary>
+          <img src="/icons/acount.svg" class="icon" width="20">
+          <%= user.name %>
+        </summary>
+        <ul class="menu">
+          <li><a href="/log-out">Log-out</a></li>
+        </ul>
+      </details>
+    </div>
+  </header>
+  <% } else { %>
+    <header class="header-bar">
+      <a href="/">
+        <h1>Gallery</h1>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/sign-up">Sign-in</a></li>
+        </ul>
+      </nav>
+    </header>
+    <% } %>
+    <form class="single-form post" method="POST" enctype="multipart/form-data">
+    <h2>Add Image</h2>
+    <label for="title">Title:</label>
+    <input name="title" type="text" placeholder="Image title" maxlength="32"autofocus/>
+    <label for="uploadForm">Image:</label>
+    <input id="uploadForm" type="file" name="image" accept="image/*" required/>
+    <button>ADD</button>
+  </form>
+</body>
+
+</html>

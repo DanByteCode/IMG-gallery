@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Collection</title>
+  <link rel="shortcut icon" href="/icons/photos.svg" type="image/x-icon">
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+
+<body>
+  <% if (user) {%>
+    <header class="header-bar">
+      <a href="/">
+        <h1>IMG.allery</h1>
+      </a>
+      <div class="navigation">
+        <nav class="selector">
+          <ul>
+            <li><a href="/">Public</a></li>
+            <li><a href="/gallery">Private</a></li>
+          </ul>
+        </nav>
+        <details>
+          <summary>
+            <img src="/icons/acount.svg" class="icon" width="20">
+            <%= user.name %>
+          </summary>
+          <ul class="menu">
+            <li><a href="/log-out">Log-out</a></li>
+          </ul>
+        </details>
+      </div>
+    </header>
+    <% } else { %>
+      <header class="header-bar">
+        <a href="/">
+          <h1>IMG.allery</h1>
+        </a>
+        <nav>
+          <ul>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/sign-up">Sign-in</a></li>
+          </ul>
+        </nav>
+      </header>
+      <% } %>
+        <main>
+          <form method="post">
+            <label for="title">Title:</label>
+            <input id="title" name="title" type="text" value="<%= collection.name %>" minlength="4" maxlength="32"
+              required autofocus />
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" value="<%= collection.description %>" maxlength="64"></textarea>
+            <div>
+              <label for="publish">Public: </label>
+              <input id="publish" name="publish" type="checkbox" <%=collection.publish ? "checked" : "" %> />
+            </div>
+            <div class="btn-container">
+              <button>EDIT</button>
+              <a class="back-btn a-button" href="/collection/<%= collection.id %>">Cancel</a>
+              <a class="del-btn a-button" href="/collection/<%= collection.id %>/delete">Delete</a>
+            </div>
+          </form>
+        </main>
+</body>
+
+</html>
