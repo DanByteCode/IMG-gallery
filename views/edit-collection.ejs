@@ -51,7 +51,7 @@
             <input id="title" name="title" type="text" value="<%= collection.name %>" minlength="4" maxlength="32"
               required autofocus />
             <label for="description">Description:</label>
-            <textarea id="description" name="description" value="<%= collection.description %>" maxlength="64"></textarea>
+            <textarea id="description" name="description" maxlength="64"><%= collection.description %></textarea>
             <div>
               <label for="publish">Public: </label>
               <input id="publish" name="publish" type="checkbox" <%=collection.publish ? "checked" : "" %> />
