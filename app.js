@@ -16,6 +16,7 @@ const app = express()
 setupSession(app)
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 app.set('view engine', 'ejs')
+app.set('views', path.join(dirname, 'views'))
 app.use(morgan('dev'))
 
 app.use(express.urlencoded({ extended: false }))
