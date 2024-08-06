@@ -5,7 +5,6 @@ import { config } from './config.js'
 import { errorHandler } from './middlewares/error.js'
 import setupSession from './middlewares/sesion.js'
 import morgan from 'morgan'
-import { __express as ejsExpress } from 'ejs'
 import { route as indexRouter } from './routes/index.js'
 import { route as signRouter } from './routes/sign-up.js'
 import { route as loginRouter } from './routes/login.js'
@@ -17,9 +16,8 @@ const app = express()
 setupSession(app)
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 app.set('view engine', 'ejs')
-app.engine('ejs', ejsExpress)
 app.set('views', path.join(dirname, 'views'))
-app.use(morgan('dev'))
+app.use(morgan('tiny'))
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(dirname, 'public')))
